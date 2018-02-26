@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Young Person</title>
+  <script src="bundle.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <div id="form-container">
+
+    <form class="form" method="POST" action="/json" id="sign-in-form">
+      <div class="switch-title">First Visit?</div>
+      <input type="radio" id="visit_switch_left" name="visit_switch" value="yes" checked onchange="radioChecker(event)"/>
+      <label for="visit_switch_left">Yes</label>
+      <input type="radio" id="visit_switch_right" name="visit_switch" value="no" onchange="radioChecker(event)"/>
+      <label for="visit_switch_right">No</label>
+    <!-- </form> -->
+
+    <!-- <form class="form"> -->
+      <div class="switch-title">Appointment/Course?</div>
+      <input type="radio" id="appt_switch_left" name="appt_switch" value="yes" checked onchange="radioChecker(event)" />
+      <label for="appt_switch_left">Yes</label>
+      <input type="radio" id="appt_switch_right" name="appt_switch" value="no" onchange="radioChecker(event)" />
+      <label for="appt_switch_right">No</label>
+    <!-- </form> -->
+
+    <!-- <form class="form"> -->
+      <div class="switch-title">Here to see:</div>
+      <input type="radio" id="h2s_switch_left" name="h2s_switch" value="Princes Trust" checked onchange="radioChecker(event)"/>
+      <label for="h2s_switch_left">Princes Trust</label>
+      <input type="radio" id="h2s_switch_right" name="h2s_switch" value="Other" onchange="radioChecker(event)"/>
+      <label for="h2s_switch_right">Other</label>
+
+      <div id="submit-and-cancel">
+        <button type="submit">Sign in</button>
+        <a href="/"><button>Back</button></a>
+      </div>
+    </form>
+
+  </div>
+
+  <script>
+
+  function radioChecker(event) {
+    console.log(event.srcElement.value);
+  }
+
+</script>
+</body>
+</html>

@@ -4,6 +4,13 @@ body {
   font-family: Arial;
 }
 
+form#sign-in-form {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #welcome-headline {
   color: #CC0033;
 }
@@ -13,6 +20,11 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+#form-container {
+  display: flex;
+  flex-direction: column;
 }
 
 #logo {
@@ -52,4 +64,30 @@ form {
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
+}
+
+/* FORM BUTTONS */
+
+.switch-title {
+  color: #CC0033;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+input[type=radio] + label {
+  padding: 20px;
+  border-radius: 40px;
+  border: 1px solid #ddd;
+}
+input[type=radio] + label:hover {
+  border: 1px solid red;
+}
+input[type=radio]:checked + label {
+  border: 1px solid red;
+}
+
+#submit-and-cancel {
+  display:flex;
 }
