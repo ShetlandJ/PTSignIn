@@ -1,0 +1,22 @@
+{
+  "name": "Africa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "webpack": "cd client && webpack -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "James Stewart",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "d3": "^4.13.0",
+    "d3-array": "^1.2.1",
+    "d3-collection": "^1.0.4",
+    "express": "^4.16.2",
+    "nodemon": "^1.14.12"
+  }
+}
