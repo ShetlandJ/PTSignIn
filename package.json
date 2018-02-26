@@ -1,7 +1,6 @@
 {
   "name": "PTFileShare",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "webpack": "cd client && webpack -w",
@@ -18,5 +17,15 @@
     "d3-collection": "^1.0.4",
     "express": "^4.16.2",
     "nodemon": "^1.14.12"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShetlandJ/PTSignIn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ShetlandJ/PTSignIn/issues"
+  },
+  "homepage": "https://github.com/ShetlandJ/PTSignIn#readme",
+  "description": ""
 }

@@ -1,24 +1,21 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
-var jsonData = require("./public/cleaned-master")
-var pooled = require("./public/pooled")
-var envelopes = require("./public/envelopes")
-var path = require('path')
 
-var TreeMap2016 = require('./controllers/TreeMap2016')
+var path = require('path')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('client/build'));
 
-app.use(require('./controllers/Locations'));
+// app.use(require('./controllers/class'));
 
 app.get("/", function(req, res){
-  res.json(path.join(__dirname + '/index.html'));
+  res.json(path.join(__dirname + '/client/build/index.html'));
 });
 
 app.get("/json", function(req, res){
-  res.json({"Heck!": "lo");
+  res.json({"Heck!": "lo"});
 });
 
 

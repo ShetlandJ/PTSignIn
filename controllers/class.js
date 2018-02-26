@@ -4,9 +4,9 @@ var path = require('path');
 
 router.use('/locations', router);
 
-router.get('/', function(req, res) {
+router.get('/test', function(req, res) {
 
-  res.json(placeArray);
+  res.json({"Hello": "World"});
 });
 
 module.exports = router;
