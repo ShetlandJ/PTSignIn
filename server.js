@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var ObjectId = require("mongodb").ObjectId;
+var db_details = require("./db_details");
 
 var path = require('path')
 
@@ -11,8 +12,7 @@ app.use(express.static('client/build'));
 
 var MongoClient = require("mongodb").MongoClient;
 
-
-MongoClient.connect("mongodb://localhost:27017/signins", function(err, client){
+MongoClient.connect("mongodb://"+db_details.username+":"+db_details.password+"@ds135818.mlab.com:35818/signups", function(err, client){
   if (err){
     return console.log(err);
   }
