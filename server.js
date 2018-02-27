@@ -9,23 +9,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('client/build'));
 
+const db_details = require("./db_details.js");
+
 var MongoClient = require("mongodb").MongoClient;
 
-
-MongoClient.connect("mongodb://localhost:27017/signins", function(err, client){
+MongoClient.connect("mongodb://"+db_details.username+":"+db_details.password+"@ds135818.mlab.com:35818/signups", function(err, client){
   if (err){
     return console.log(err);
   }
   db = client.db('signins');
   console.log("connected to db");
 
-  db.collection('signins').insert({
-    'First Visit?': "Heck no",
-    'Appointment?': 'Heck yes',
-    'Here to see?': 'ME'
-  })
-
-  app.listen(3000, function(){
+  app.listen(process.env.PORT || 3000, function(){
     console.log("Listening on port 3000");
   });
 });
