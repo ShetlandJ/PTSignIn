@@ -8,7 +8,7 @@ var path = require('path')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('client/build'));
-const db_details = require("./db_details");
+const db_details = require(__dirname + "./db_details.js");
 
 var MongoClient = require("mongodb").MongoClient;
 
