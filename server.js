@@ -44,28 +44,35 @@ app.post('/json', function(req, res){
 
   // Insert document in collection
   db.collection('signins').insert({
+    personStatus: "young",
     firstVisit: visiting,
     appt: appt,
     hereToSee: h2s,
     date: date
   }, function(err, doc) {
 
-    if(err) throw err;
-    console.log("Saved to DB");
-    res.redirect('/');
-  });
-});
-
-app.get('/signins', function(req, res) {
-
-  db.collection("signins").find().toArray(function(err, results){
     if(err){
-      return console.log(err);
-    }
-    res.json(results);
-  });
-});
+      return err;
+    } else {
+      console.log("Saved to DB");
 
-app.get("/youngperson", function(req, res){
-  res.sendFile(path.join(__dirname + '/client/build/', 'youngperson.html'));
-});
+      setInterval(function(){
+        res.redirect('/') },1000);
+      }
+    });
+
+  });
+
+  app.get('/signins', function(req, res) {
+
+    db.collection("signins").find().toArray(function(err, results){
+      if(err){
+        return console.log(err);
+      }
+      res.json(results);
+    });
+  });
+
+  app.get("/youngperson", function(req, res){
+    res.sendFile(path.join(__dirname + '/client/build/', 'youngperson.html'));
+  });
