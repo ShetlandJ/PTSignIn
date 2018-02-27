@@ -35,7 +35,7 @@ app.get("/", function(req, res){
   res.send(path.join(__dirname + '/client/build/index.html'));
 });
 
-app.post('/json', function(req, res){
+app.post('/youngperson', function(req, res){
   //Retrieve data sent by the client in the post request
   var visiting = req.body.visit_switch;
   var appt = req.body.appt_switch;
@@ -56,7 +56,7 @@ app.post('/json', function(req, res){
     } else {
       console.log("Saved to DB");
 
-      setInterval(function(){
+      setTimeout(function(){
         res.redirect('/') },1000);
       }
     });
