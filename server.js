@@ -19,12 +19,6 @@ MongoClient.connect("mongodb://"+db_details.username+":"+db_details.password+"@d
   db = client.db('signins');
   console.log("connected to db");
 
-  db.collection('signins').insert({
-    'First Visit?': "Heck no",
-    'Appointment?': 'Heck yes',
-    'Here to see?': 'ME'
-  })
-
   app.listen(process.env.PORT || 3000, function(){
     console.log("Listening on port 3000");
   });
