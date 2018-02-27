@@ -1,6 +1,6 @@
 var DbDetails = {
-  username: "admin2",
-  password: "admin2"
+  username: "admin",
+  password:"W0lfs0n!"
 }
 
 

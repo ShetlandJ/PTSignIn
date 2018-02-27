@@ -9,9 +9,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('client/build'));
 
+var dbDetails = require('db_details.js')
+
 var MongoClient = require("mongodb").MongoClient;
 
-MongoClient.connect("mongodb://admin:Pr1nc3sT!@ds135818.mlab.com:35818/signups", function(err, client){
+MongoClient.connect("mongodb://"+dbDetails.username+":"+dbDetails.password+"@ds151348.mlab.com:51348/signins", function(err, client){
   if (err){
     return console.log(err);
   }
