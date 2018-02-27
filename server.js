@@ -2,13 +2,13 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var ObjectId = require("mongodb").ObjectId;
-const db_details = require("./db_details");
 
 var path = require('path')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('client/build'));
+const db_details = require("./db_details");
 
 var MongoClient = require("mongodb").MongoClient;
 
