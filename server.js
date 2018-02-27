@@ -11,7 +11,7 @@ app.use(express.static('client/build'));
 
 var MongoClient = require("mongodb").MongoClient;
 
-MongoClient.connect("mongodb://admin2:admin2@ds135818.mlab.com:35818/signups", function(err, client){
+MongoClient.connect("mongodb://admin:Pr1nc3sT!@ds135818.mlab.com:35818/signups", function(err, client){
   if (err){
     return console.log(err);
   }
