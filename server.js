@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('client/build'));
 
-var dbDetails = require('db_details.js')
+var dbDetails = require('./db_details.js')
 
 var MongoClient = require("mongodb").MongoClient;
 
