@@ -4,6 +4,10 @@ body {
   font-family: Arial;
 }
 
+h1 {
+  font-size: 50px;
+}
+
 form#sign-in-form {
   display:flex;
   flex-direction: column;
@@ -36,7 +40,7 @@ form#sign-in-form {
 }
 
 img {
-  width: 100%;
+  width: 80%;
 }
 
 #buttons {
@@ -47,14 +51,15 @@ img {
 button {
   background-color: #CC0033;
   color: white;
-  font-size: 30px;
+  font-size: 50px;
   margin-right: 10px;
   margin-left: 10px;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 form {
-  display:flex;å
+  display:flex;
 }
 
 #menu-content {
