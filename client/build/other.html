@@ -4,30 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Other</title>
+  <title>Young Person</title>
   <script src="bundle.js"></script>
   <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-  <div id="container">
-    <div id="logo">
-      <img src="img/ptlogo.png" alt="Princes Trust Logo">
+
+  <div id="myModal" class="modal">
+
+    <div class="modal-content">
+      <h1>Thank you for signing in.</h1>
     </div>
 
-    <div id="menu-content">
-
-      <div id="welcome"><h1 id="welcome-headline">Welcome!</h1></div>
-      <div id="buttons">
-        <form method="GET" action="/youngperson">
-          <button>Young Person</button>
-        </form>
-        <form action="/other">
-          <button>Other</button>
-        </form>
-      </div>
-
-    </div>
   </div>
 
+  <div id="form-container">
+
+    <form class="form" method="POST" action="/other" id="sign-in-form">
+
+      <div class="switch-field">
+        <div class="switch-title">First visit?</div>
+        <input type="radio" id="visit_switch_left" name="visit_switch" value="yes" checked/>
+        <label for="visit_switch_left">Yes</label>
+        <input type="radio" id="visit_switch_right" name="visit_switch" value="no" />
+        <label for="visit_switch_right">No</label>
+      </div>
+
+      <div class="switch-field">
+        <div class="switch-title">Appointment?</div>
+        <input type="radio" id="appt_switch_left" name="appt_switch" value="yes" checked/>
+        <label for="appt_switch_left">Yes</label>
+        <input type="radio" id="appt_switch_right" name="appt_switch" value="no" />
+        <label for="appt_switch_right">No</label>
+      </div>
+
+      <div class="switch-field">
+        <div class="switch-title">Who are you here to see?</div>
+        <input type="radio" id="h2s_switch_left" name="h2s_switch" value="Prince's Trust" checked/>
+        <label for="h2s_switch_left">Prince's Trust</label>
+        <input type="radio" id="h2s_switch_right" name="h2s_switch" value="Other" />
+        <label for="h2s_switch_right">Other</label>
+      </div>
+
+      <div id="submit-and-cancel">
+        <button type="submit" onClick="showModal()">Sign in</button>
+        <a href="/"><button>Back</button></a>
+      </div>
+    </form>
+
+
+  </div>
+
+  <script>
+
+  function radioChecker(event) {
+    console.log(event.srcElement.value);
+  }
+
+  function showModal() {
+    console.log("Hecklo")
+    var modal = document.getElementById('myModal');
+    modal.style.display = 'block'
+  }
+
+</script>
 </body>
 </html>

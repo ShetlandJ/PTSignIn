@@ -57,22 +57,55 @@ app.post('/youngperson', function(req, res){
       console.log("Saved to DB");
 
       setTimeout(function(){
-        res.redirect('/') },1000);
+        res.redirect('/') },2500);
       }
     });
 
   });
 
-  app.get('/signins', function(req, res) {
+  app.post('/other', function(req, res){
+    //Retrieve data sent by the client in the post request
+    var visiting = req.body.visit_switch;
+    var appt = req.body.appt_switch;
+    var h2s = req.body.h2s_switch;
+    var date = Date.now()
 
-    db.collection("signins").find().toArray(function(err, results){
-      if(err){
-        return console.log(err);
-      }
-      res.json(results);
+    // Insert document in collection
+    db.collection('signins').insert({
+      personStatus: "other",
+      firstVisit: visiting,
+      appt: appt,
+      hereToSee: h2s,
+      date: date
+    }, function(err, doc) {
+
+      if(err) {
+        return err;
+      } else {
+        console.log("Saved to DB");
+
+        setTimeout(function(){
+          res.redirect('/') }, 2500);
+        }
+      });
+
     });
-  });
 
-  app.get("/youngperson", function(req, res){
-    res.sendFile(path.join(__dirname + '/client/build/', 'youngperson.html'));
-  });
+
+    app.get('/signins', function(req, res) {
+
+      db.collection("signins").find().toArray(function(err, results){
+        if(err){
+          return console.log(err);
+        }
+        res.json(results);
+      });
+    });
+
+    app.get("/youngperson", function(req, res){
+      res.sendFile(path.join(__dirname + '/client/build/', 'youngperson.html'));
+    });
+
+    app.get("/other", function(req, res){
+      res.sendFile(path.join(__dirname + '/client/build/', 'other.html'));
+    });
