@@ -3,5 +3,3 @@ node_modules/
 *.pem
 
 bundle.*
-
-db_details.js
