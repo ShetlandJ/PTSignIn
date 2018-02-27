@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var ObjectId = require("mongodb").ObjectId;
-const db_details = require("db_details.js");
+const db_details = require("./db_details");
 
 var path = require('path')
 
