@@ -69,7 +69,3 @@ app.get('/signins', function(req, res) {
 app.get("/youngperson", function(req, res){
   res.sendFile(path.join(__dirname + '/client/build/', 'youngperson.html'));
 });
-
-app.get("/json", function(req, res){
-  res.json({"Heck!": "lo"});
-});

@@ -13,33 +13,37 @@
   <div id="form-container">
 
     <form class="form" method="POST" action="/json" id="sign-in-form">
-      <div class="switch-title">First Visit?</div>
-      <input type="radio" id="visit_switch_left" name="visit_switch" value="yes" checked onchange="radioChecker(event)"/>
-      <label for="visit_switch_left">Yes</label>
-      <input type="radio" id="visit_switch_right" name="visit_switch" value="no" onchange="radioChecker(event)"/>
-      <label for="visit_switch_right">No</label>
-    <!-- </form> -->
 
-    <!-- <form class="form"> -->
-      <div class="switch-title">Appointment/Course?</div>
-      <input type="radio" id="appt_switch_left" name="appt_switch" value="yes" checked onchange="radioChecker(event)" />
-      <label for="appt_switch_left">Yes</label>
-      <input type="radio" id="appt_switch_right" name="appt_switch" value="no" onchange="radioChecker(event)" />
-      <label for="appt_switch_right">No</label>
-    <!-- </form> -->
+      <div class="switch-field">
+        <div class="switch-title">First visit?</div>
+        <input type="radio" id="visit_switch_left" name="visit_switch" value="yes" checked/>
+        <label for="visit_switch_left">Yes</label>
+        <input type="radio" id="visit_switch_right" name="visit_switch" value="no" />
+        <label for="visit_switch_right">No</label>
+      </div>
 
-    <!-- <form class="form"> -->
-      <div class="switch-title">Here to see:</div>
-      <input type="radio" id="h2s_switch_left" name="h2s_switch" value="Princes Trust" checked onchange="radioChecker(event)"/>
-      <label for="h2s_switch_left">Princes Trust</label>
-      <input type="radio" id="h2s_switch_right" name="h2s_switch" value="Other" onchange="radioChecker(event)"/>
-      <label for="h2s_switch_right">Other</label>
+      <div class="switch-field">
+        <div class="switch-title">Appointment?</div>
+        <input type="radio" id="appt_switch_left" name="appt_switch" value="yes" checked/>
+        <label for="appt_switch_left">Yes</label>
+        <input type="radio" id="appt_switch_right" name="appt_switch" value="no" />
+        <label for="appt_switch_right">No</label>
+      </div>
+
+      <div class="switch-field">
+        <div class="switch-title">Who are you here to see?</div>
+        <input type="radio" id="h2s_switch_left" name="h2s_switch" value="yes" checked/>
+        <label for="h2s_switch_left">Yes</label>
+        <input type="radio" id="h2s_switch_right" name="h2s_switch" value="no" />
+        <label for="h2s_switch_right">No</label>
+      </div>
 
       <div id="submit-and-cancel">
         <button type="submit">Sign in</button>
         <a href="/"><button>Back</button></a>
       </div>
     </form>
+
 
   </div>
 
