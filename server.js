@@ -80,27 +80,32 @@ app.post('/youngperson', function(req, res){
         console.log("Saved to DB");
 
         setTimeout(function(){
-          res.redirect('/') }, 2500);
-        }
-      });
-
+          res.redirect('/')
+        }, 2500);
+      }
     });
 
+  });
 
-    app.get('/signins', function(req, res) {
 
-      db.collection("signins").find().toArray(function(err, results){
-        if(err){
-          return console.log(err);
-        }
-        res.json(results);
-      });
+  app.get('/signins', function(req, res) {
+
+    db.collection("signins").find().toArray(function(err, results){
+      if(err){
+        return console.log(err);
+      }
+      res.json(results);
     });
+  });
 
-    app.get("/youngperson", function(req, res){
-      res.sendFile(path.join(__dirname + '/client/build/', 'youngperson.html'));
-    });
+  app.get("/youngperson", function(req, res){
+    res.sendFile(path.join(__dirname + '/client/build/', 'youngperson.html'));
+  });
 
-    app.get("/other", function(req, res){
-      res.sendFile(path.join(__dirname + '/client/build/', 'other.html'));
-    });
+  app.get("/other", function(req, res){
+    res.sendFile(path.join(__dirname + '/client/build/', 'other.html'));
+  });
+
+  app.get('/stats', function(req, res){
+    res.sendFile(path.join(__dirname + '/client/build/', 'stats.html'))
+  })
