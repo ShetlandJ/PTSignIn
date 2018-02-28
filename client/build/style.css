@@ -211,3 +211,9 @@ form {
 #visits {
   display: flex;
 }
+
+
+canvas {
+  height: 400px;
+  width: 400px;
+}

@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Young Person</title>
   <script src="bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
   <link rel="stylesheet" href="style.css">
 
 </head>
@@ -22,7 +23,78 @@
     <h2 id="visits-today"></h2>
   </div>
 
+  <canvas id="month-visits-chart"></canvas>
   <script>
+
+  var getDaysInMonth = function(month, year) {
+
+    var date = new Date(year, month, 1);
+    var days = [];
+    console.log('month', month, 'date.getMonth()', date.getMonth())
+    while (date.getMonth() === month) {
+      days.push(new Date(date));
+      date.setDate(date.getDate() + 1);
+    }
+    return days;
+  }
+
+  var renderBarChart = function(myData) {
+
+    var dayMonth = []
+    var visits = []
+    var days_array = getDaysInMonth(1, 2018)
+
+    for (var day of days_array) {
+      dayMonth.push(day.getDate())
+    }
+
+    var today = new Date();
+    var mm = today.getMonth()+1
+    var yy = today.getYear()
+    for (var i = 0; i < dayMonth.length; i++) {
+      visitDayCount = 0
+      for (var visit of myData) {
+          visitDate = new Date(visit.date)
+
+        if (visitDate.getDate() === dayMonth[i]) {
+          visitDayCount += 1;
+        }
+      }
+      visits.push(visitDayCount);
+    }
+
+    var ctx = document.getElementById("month-visits-chart").getContext('2d');
+    var myBarChart = new Chart(ctx, {
+      type: 'horizontalBar',
+      data: {
+        labels: dayMonth,
+        datasets: [{
+          label: 'Visits this month by day',
+          data: visits,
+          backgroundColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(54, 162, 235, 1)',
+          ],
+          borderColor: [
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
+  }
 
   var home = function() {
 
@@ -40,11 +112,11 @@
       var jsonString = this.responseText;
       myData = JSON.parse(jsonString);
       today()
+      renderBarChart(myData);
     }
 
     makeRequest(url, requestComplete)
   }
-
 
   var today = function() {
 
@@ -90,8 +162,9 @@
       }
     }
 
-    renderMonth(myData)
+    renderMonth(myData);
   }
+
 
 
   window.addEventListener( 'load', home);
