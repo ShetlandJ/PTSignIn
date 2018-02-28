@@ -12,7 +12,7 @@
 <body>
 
   <div class="topnav">
-    <button onClick="home()">Today</button>
+    <button onClick="today()">Today</button>
     <button onClick=thisMonth()>This Month</button>
     <button>This Year</button>
     <button>All time</button>
@@ -38,78 +38,64 @@
     var requestComplete = function(){
       if (this.status !== 200) return;
       var jsonString = this.responseText;
-      var myData = JSON.parse(jsonString);
-      renderInfo(myData)
-
+      myData = JSON.parse(jsonString);
+      today()
     }
 
     makeRequest(url, requestComplete)
   }
 
 
-  var renderInfo = function(myData) {
-    var today = new Date();
-    var dd = today.getDate()
-    var mm = today.getMonth()+1
-    var yy = today.getYear()
+  var today = function() {
 
-    let counter = 0
-    for (var visit of myData) {
-      visitDate = new Date(visit.date)
+    var renderToday = function(myData) {
+      var today = new Date();
+      var dd = today.getDate()
+      var mm = today.getMonth()+1
+      var yy = today.getYear()
 
-      if (visitDate.getDate() === dd && visitDate.getMonth()+1 === mm && visitDate.getYear() === yy) {
-        counter += 1
+      let counter = 0
+      for (var visit of myData) {
+        visitDate = new Date(visit.date)
+
+        if (visitDate.getDate() === dd && visitDate.getMonth()+1 === mm && visitDate.getYear() === yy) {
+          counter += 1
+        }
+
+        document.getElementById('visits-today').innerText = "Visits today: " + counter
       }
-
-      document.getElementById('visits-today').innerText = "Visits today: " + counter
     }
+
+    renderToday(myData)
   }
 
 
   var thisMonth = function() {
 
-    const url = 'https://api.mlab.com/api/1/databases/signins/collections/signins?apiKey=Vp2I1nmC961_lV2whDojmmOuZzXb0S_o';
+    var renderMonth = function(myData) {
+      var today = new Date();
+      var dd = today.getDate()
+      var mm = today.getMonth()+1
+      var yy = today.getYear()
 
-    var makeRequest = function(url, callback){
-      var request = new XMLHttpRequest();
-      request.open("GET", url);
-      request.addEventListener("load", callback);
-      request.send();
-    }
+      let counter = 0
+      for (var visit of myData) {
+        visitDate = new Date(visit.date)
 
-    var requestComplete = function(){
-      if (this.status !== 200) return;
-      var jsonString = this.responseText;
-      var myData = JSON.parse(jsonString);
-      renderMonth(myData)
+        if (visitDate.getMonth()+1 === mm && visitDate.getYear() === yy) {
+          counter += 1
+        }
 
-    }
-
-    makeRequest(url, requestComplete)
-  }
-
-
-  var renderMonth = function(myData) {
-    var today = new Date();
-    var dd = today.getDate()
-    var mm = today.getMonth()+1
-    var yy = today.getYear()
-
-    let counter = 0
-    for (var visit of myData) {
-      visitDate = new Date(visit.date)
-
-      if (visitDate.getMonth()+1 === mm && visitDate.getYear() === yy) {
-        counter += 1
+        document.getElementById('visits-today').innerText = "Visits this month: " + counter
       }
-
-      document.getElementById('visits-today').innerText = "Visits this month: " + counter
     }
+
+    renderMonth(myData)
   }
 
 
   window.addEventListener( 'load', home);
-</script>
+  </script>
 
 </body>
 </html>
