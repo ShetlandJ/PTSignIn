@@ -11,9 +11,20 @@
 </head>
 <body>
 
+  <div class="topnav">
+    <button onClick="home()">Today</button>
+    <button onClick=thisMonth()>This Month</button>
+    <button>This Year</button>
+    <button>All time</button>
+  </div>
+
+  <div id="visits">
+    <h2 id="visits-today"></h2>
+  </div>
+
   <script>
 
-  var app = function() {
+  var home = function() {
 
     const url = 'https://api.mlab.com/api/1/databases/signins/collections/signins?apiKey=Vp2I1nmC961_lV2whDojmmOuZzXb0S_o';
 
@@ -28,18 +39,76 @@
       if (this.status !== 200) return;
       var jsonString = this.responseText;
       var myData = JSON.parse(jsonString);
-      console.log(myData);
+      renderInfo(myData)
+
     }
 
     makeRequest(url, requestComplete)
   }
 
 
-}
+  var renderInfo = function(myData) {
+    var today = new Date();
+    var dd = today.getDate()
+    var mm = today.getMonth()+1
+    var yy = today.getYear()
+
+    let counter = 0
+    for (var visit of myData) {
+      visitDate = new Date(visit.date)
+
+      if (visitDate.getDate() === dd && visitDate.getMonth()+1 === mm && visitDate.getYear() === yy) {
+        counter += 1
+      }
+
+      document.getElementById('visits-today').innerText = "Visits today: " + counter
+    }
+  }
 
 
-window.addEventListener( 'load', app);
+  var thisMonth = function() {
 
+    const url = 'https://api.mlab.com/api/1/databases/signins/collections/signins?apiKey=Vp2I1nmC961_lV2whDojmmOuZzXb0S_o';
+
+    var makeRequest = function(url, callback){
+      var request = new XMLHttpRequest();
+      request.open("GET", url);
+      request.addEventListener("load", callback);
+      request.send();
+    }
+
+    var requestComplete = function(){
+      if (this.status !== 200) return;
+      var jsonString = this.responseText;
+      var myData = JSON.parse(jsonString);
+      renderMonth(myData)
+
+    }
+
+    makeRequest(url, requestComplete)
+  }
+
+
+  var renderMonth = function(myData) {
+    var today = new Date();
+    var dd = today.getDate()
+    var mm = today.getMonth()+1
+    var yy = today.getYear()
+
+    let counter = 0
+    for (var visit of myData) {
+      visitDate = new Date(visit.date)
+
+      if (visitDate.getMonth()+1 === mm && visitDate.getYear() === yy) {
+        counter += 1
+      }
+
+      document.getElementById('visits-today').innerText = "Visits this month: " + counter
+    }
+  }
+
+
+  window.addEventListener( 'load', home);
 </script>
 
 </body>
