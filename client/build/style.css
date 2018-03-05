@@ -212,8 +212,7 @@ form {
   display: flex;
 }
 
-
-canvas {
-  height: 400px;
-  width: 400px;
+.chartBlock {
+  width: 800px;
+  height: 700px;
 }

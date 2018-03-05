@@ -15,7 +15,7 @@
   <div class="topnav">
     <button onClick="today()">Today</button>
     <button onClick=thisMonth()>This Month</button>
-    <button>This Year</button>
+    <button onClick="thisYear()">This Year</button>
     <button>All time</button>
   </div>
 
@@ -23,7 +23,9 @@
     <h2 id="visits-today"></h2>
   </div>
 
-  <canvas id="month-visits-chart"></canvas>
+  <div class="chartBlock">
+    <canvas id="month-visits-chart"></canvas>
+  </div>
   <script>
 
   var getDaysInMonth = function(month, year) {
@@ -40,9 +42,12 @@
 
   var renderBarChart = function(myData) {
 
+    var today = new Date();
+    var mm = today.getMonth()+1
+
     var dayMonth = []
     var visits = []
-    var days_array = getDaysInMonth(1, 2018)
+    var days_array = getDaysInMonth(mm, 2018)
 
     for (var day of days_array) {
       dayMonth.push(day.getDate())
@@ -54,9 +59,9 @@
     for (var i = 0; i < dayMonth.length; i++) {
       visitDayCount = 0
       for (var visit of myData) {
-          visitDate = new Date(visit.date)
+        visitDate = new Date(visit.date)
 
-        if (visitDate.getDate() === dayMonth[i]) {
+        if (visitDate.getDate() === dayMonth[i] && visitDate.getMonth()+1 === mm) {
           visitDayCount += 1;
         }
       }
@@ -68,17 +73,13 @@
       type: 'horizontalBar',
       data: {
         labels: dayMonth,
+        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFFFFF',
         datasets: [{
           label: 'Visits this month by day',
           data: visits,
-          backgroundColor: [
-            'rgba(54, 162, 235, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(54, 162, 235, 1)',
-          ],
+          backgroundColor:
+          '#CC0033',
           borderColor: [
           ],
           borderWidth: 1
@@ -164,6 +165,30 @@
 
     renderMonth(myData);
   }
+
+  var thisYear = function() {
+
+    var renderYear = function(myData) {
+      var today = new Date();
+      var dd = today.getDate()
+      var mm = today.getMonth()+1
+      var yy = today.getYear()
+
+      let counter = 0
+      for (var visit of myData) {
+        visitDate = new Date(visit.date)
+
+        if (visitDate.getYear() === yy) {
+          counter += 1
+        }
+
+        document.getElementById('visits-today').innerText = "Visits this year: " + counter
+      }
+    }
+
+    renderYear(myData);
+  }
+
 
 
 
