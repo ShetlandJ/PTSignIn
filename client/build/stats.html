@@ -26,6 +26,10 @@
   <div class="chartBlock">
     <canvas id="month-visits-chart"></canvas>
   </div>
+
+  <div class="chartBlock">
+    <canvas id="hourly-visits-chart"></canvas>
+  </div>
   <script>
 
   var getDaysInMonth = function(month, year) {
@@ -97,6 +101,56 @@
     });
   }
 
+  var renderHourlyBarChart = function(myData) {
+    var visits = [];
+    var hours_array = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1
+    var yy = today.getYear()
+    for (var i = 0; i < hours_array.length; i++) {
+      hourVisitCount = 0
+      for (var visit of myData) {
+        visitDate = new Date(visit.date)
+
+        if (visitDate.getHours() === hours_array[i] && visitDate.getDate() === dd && visitDate.getMonth()+1 === mm) {
+          hourVisitCount += 1;
+        }
+      }
+      visits.push(hourVisitCount);
+    }
+
+    var ctx = document.getElementById("hourly-visits-chart").getContext('2d');
+    var myBarChart = new Chart(ctx, {
+      type: 'horizontalBar',
+      data: {
+        labels: hours_array,
+        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFFFFF',
+        datasets: [{
+          label: 'Visits today by hour',
+          data: visits,
+          backgroundColor:
+          '#CC0033',
+          borderColor: [
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+    });
+  }
+
+
   var home = function() {
 
     const url = 'https://api.mlab.com/api/1/databases/signins/collections/signins?apiKey=Vp2I1nmC961_lV2whDojmmOuZzXb0S_o';
@@ -114,6 +168,7 @@
       myData = JSON.parse(jsonString);
       today()
       renderBarChart(myData);
+      renderHourlyBarChart(myData);
     }
 
     makeRequest(url, requestComplete)
@@ -188,9 +243,6 @@
 
     renderYear(myData);
   }
-
-
-
 
   window.addEventListener( 'load', home);
   </script>

@@ -1,7 +1,7 @@
 body {
   margin: 0;
   background-color: #FFEBEE;
-  font-family: Arial;
+  font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 h1 {
@@ -177,7 +177,6 @@ form {
   justify-content: center;
 }
 
-
 /* STATS PAGE */
 
 .topnav {
@@ -214,5 +213,4 @@ form {
 
 .chartBlock {
   width: 800px;
-  height: 700px;
 }
