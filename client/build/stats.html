@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Young Person</title>
+  <title>Stats</title>
   <script src="bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
   <link rel="stylesheet" href="style.css">
-
 </head>
+
 <body>
 
   <div class="topnav">
+    <a href="/"><button id="home-btn">Home</button></a>
     <button onClick="today()">Today</button>
     <button onClick=thisMonth()>This Month</button>
     <button onClick="thisYear()">This Year</button>
@@ -24,24 +25,44 @@
   </div>
 
   <div class="chartBlock">
+    <h3 id="monthly-total"></h3>
     <canvas id="month-visits-chart"></canvas>
   </div>
 
   <div class="chartBlock">
     <canvas id="hourly-visits-chart"></canvas>
   </div>
+
   <script>
 
   var getDaysInMonth = function(month, year) {
 
     var date = new Date(year, month, 1);
     var days = [];
-    console.log('month', month, 'date.getMonth()', date.getMonth())
+    // console.log('month', month, 'date.getMonth()', date.getMonth())
     while (date.getMonth() === month) {
       days.push(new Date(date));
       date.setDate(date.getDate() + 1);
     }
     return days;
+  }
+
+  var monthlyTotal = function(myData) {
+    var today = new Date();
+    var mm = today.getMonth()+1
+    var yy = today.getYear()
+    for (var i = 0; i < dayMonth.length; i++) {
+      var counter = 0
+      for (var visit of myData) {
+        visitDate = new Date(visit.date)
+
+        if (visitDate.getMonth()+1 === mm && visitDate.getYear() === yy ) {
+          counter += 1;
+        }
+      }
+      document.getElementById('monthly-total').innerText = "Total this month:" + counter;
+    }
+
   }
 
   var renderBarChart = function(myData) {
@@ -150,7 +171,6 @@
     });
   }
 
-
   var home = function() {
 
     const url = 'https://api.mlab.com/api/1/databases/signins/collections/signins?apiKey=Vp2I1nmC961_lV2whDojmmOuZzXb0S_o';
@@ -244,7 +264,7 @@
     renderYear(myData);
   }
 
-  window.addEventListener( 'load', home);
+  window.addEventListener( 'load', home );
   </script>
 
 </body>
