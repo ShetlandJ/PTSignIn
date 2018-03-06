@@ -228,11 +228,16 @@ form {
   background-color: #e74c3c;
 }
 
+div#submit-button {
+    margin-top: 25px;
+}
+
 
 @media only screen and (max-width: 640px)  {
 
   .switch-field {
     padding: 5px 40px 5px 40px;
+    margin-top: 5px;
   }
 
   button {
