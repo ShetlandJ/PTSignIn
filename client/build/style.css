@@ -214,6 +214,7 @@ form {
 
 .chartBlock {
   width: 800px;
+  display: flex;
 }
 
 #home-btn {
@@ -232,6 +233,10 @@ div#submit-button {
     margin-top: 25px;
 }
 
+#flat-pie {
+  display: flex;
+  width: 475px;
+}
 
 @media only screen and (max-width: 640px)  {
 
