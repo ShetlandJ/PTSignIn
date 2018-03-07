@@ -27,6 +27,7 @@
   <div class="chartBlock">
     <h3 id="monthly-total"></h3>
     <canvas id="month-visits-chart"></canvas>
+    <canvas id="pie-chart-type"></canvas>
   </div>
 
   <div class="chartBlock">
@@ -47,22 +48,62 @@
     return days;
   }
 
-  var monthlyTotal = function(myData) {
+  // ##################
+  // Not being used currently
+  // var monthlyTotal = function(myData) {
+  //   var today = new Date();
+  //   var mm = today.getMonth()+1
+  //   var yy = today.getYear()
+  //   for (var i = 0; i < b.length; i++) {
+  //     var counter = 0
+  //     for (var visit of myData) {
+  //       visitDate = new Date(visit.date)
+  //
+  //       if (visitDate.getMonth()+1 === mm && visitDate.getYear() === yy ) {
+  //         counter += 1;
+  //       }
+  //     }
+  //     document.getElementById('monthly-total').innerText = "Total this month:" + counter;
+  //   }
+  // }
+  // ################
+
+  var renderPieChart = function(myData) {
+
     var today = new Date();
     var mm = today.getMonth()+1
     var yy = today.getYear()
-    for (var i = 0; i < dayMonth.length; i++) {
-      var counter = 0
-      for (var visit of myData) {
-        visitDate = new Date(visit.date)
+    var youngPerson = 0;
+    var otherPerson = 0;
 
-        if (visitDate.getMonth()+1 === mm && visitDate.getYear() === yy ) {
-          counter += 1;
-        }
+    for (var signin of myData) {
+      if (signin.personStatus === "young") {
+        youngPerson += 1;
+      } else if (signin.personStatus === "other") {
+        otherPerson += 1;
       }
-      document.getElementById('monthly-total').innerText = "Total this month:" + counter;
     }
 
+    var pieData = [youngPerson, otherPerson];
+
+    var ctx = document.getElementById("pie-chart-type").getContext('2d');
+    var myPieChart = new Chart(ctx,{
+      type: 'pie',
+      data: {
+        labels: ["Young person", "other"],
+        datasets: [{
+          label: "Percentage split: young/other",
+          backgroundColor: ["#3e95cd", "#8e5ea2"],
+          data: pieData
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Young person / other split total'
+        }
+      }
+    });
   }
 
   var renderBarChart = function(myData) {
@@ -189,6 +230,7 @@
       today()
       renderBarChart(myData);
       renderHourlyBarChart(myData);
+      renderPieChart(myData);
     }
 
     makeRequest(url, requestComplete)
@@ -267,5 +309,5 @@
   window.addEventListener( 'load', home );
   </script>
 
-</body>
-</html>
+  </body>
+  </html>
